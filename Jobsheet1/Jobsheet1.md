@@ -6,11 +6,84 @@
 > **Kelas :** TI-1G/13
 
 ---
+## Latihan 1.1
+### 5 Fungsi Utama Sistem Operasi (dengan contoh lintas OS)
 
-## Latihan 1.3: Hasil Instalasi Ubuntu
+> Sistem operasi (OS) adalah software inti yang mengelola hardware, software, dan interaksi pengguna dengan komputer.
 
-![Ubuntu](images/ubuntu.png)
-*Hasil Instalasi Ubuntu*
+---
+
+### 1) Manajemen Proses
+**Pengertian:**  
+OS mengatur siklus hidup proses: membuat, menjadwalkan, memprioritaskan, hingga menghentikan proses.
+
+**Contoh konkret:**
+- **Windows:** Task Manager untuk memantau dan mengakhiri proses (mis. Chrome, Word).
+- **Linux:** `top`, `htop`, `ps`, dan `kill` untuk monitoring serta terminasi proses.
+
+---
+
+### 2) Manajemen Memori
+**Pengertian:**  
+OS mengatur penggunaan RAM agar aplikasi berjalan stabil tanpa saling mengganggu.
+
+**Contoh konkret:**
+- **macOS:** Activity Monitor menampilkan penggunaan memori aplikasi (mis. Safari, Final Cut Pro).
+- **Windows:** Tab **Performance** di Task Manager menampilkan konsumsi RAM secara real-time.
+
+---
+
+### 3) Manajemen Sistem File
+**Pengertian:**  
+OS mengelola struktur penyimpanan: penamaan, penyimpanan, akses, hingga penghapusan file.
+
+**Contoh konkret:**
+- **Windows:** File Explorer untuk membuat folder, memindahkan, dan menghapus file.
+- **Linux:** CLI seperti `mkdir`, `cp`, `rm` untuk operasi file/folder.
+
+---
+
+### 4) Manajemen Perangkat Keras
+**Pengertian:**  
+OS mengontrol perangkat keras (printer, keyboard, GPU, disk) melalui driver.
+
+**Contoh konkret:**
+- **Windows:** Device Manager untuk instalasi dan manajemen driver.
+- **macOS:** Plug-and-play, misalnya AirPods/printer terdeteksi otomatis.
+
+---
+
+### 5) Antarmuka Pengguna
+**Pengertian:**  
+OS menyediakan media interaksi user, baik GUI maupun CLI.
+
+**Contoh konkret:**
+- **Windows:** GUI melalui Desktop, Start Menu, dan ikon.
+- **Linux:** CLI via Terminal serta GUI seperti GNOME/KDE.
+
+---
+
+## Latihan 1.2:
+### Analisis: Kapan Sebaiknya Menggunakan Windows vs Linux vs macOS
+
+---
+| Use Case | Pilihan Utama | Alasan |
+|---|---|---|
+| Gaming | **Windows** | Kompatibilitas game dan driver GPU paling luas |
+| Development | **Linux / macOS** (tergantung stack) | Linux fleksibel untuk backend/devops, macOS kuat untuk mobile Apple + Unix base |
+| Server | **Linux** | Stabil, ringan, otomatisasi kuat, biaya lisensi rendah |
+| Creative Work | **macOS / Windows** | macOS unggul stabilitas ekosistem kreatif; Windows unggul opsi hardware/performa |
+| Enterprise | **Windows + Linux (hybrid)** | Windows kuat di endpoint/Office/AD, Linux dominan di server/cloud |
+
+---
+
+## Latihan 1.3: Instalasi Ubuntu
+### 1. Download Ubuntu -> ([Ubuntu](https://ubuntu.com/download/desktop))
+### 2. Download Virtual Machine (*saya menggunakan UTM karena saya menggunakan macOS*) -> ([Virtual Box](https://www.virtualbox.org/wiki/Downloads)) ([UTM](https://mac.getutm.app/))
+### 3. Run UTM dan klik Add ![UTM_ADD](images/utmAdd.png)
+kemudian sesuaikan spesifikasi yang akan diberikan ke virtual machine sesuai yang dibutuhkan dan pilih ISO Ubuntu yang sudah di download
+### 4. Install kemudia run ubuntu
+![UbuntuSS](images/ubuntu.png)
 
 ---
 
