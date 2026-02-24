@@ -1,5 +1,10 @@
 # JOBSHEET 1 - SISTEM OPERASI
 
+> **Mata Kuliah :** Sistem Operasi  
+> **Nama :** Ibni Andarta<br>
+> **NIM :** 25410702058<br>
+> **Kelas :** TI-1G/13
+
 ---
 
 ## Latihan 1.3: Hasil Instalasi Ubuntu
