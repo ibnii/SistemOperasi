@@ -1,7 +1,9 @@
-# Laporan Jobsheet 2
+# Laporan Jobsheet 2 - Manajemen Perangkat Keras & Perintah Dasar Sistem Operasi
 
-> **Mata Kuliah:** Sistem Operasi  
-> **Topik:** Manajemen Perangkat Keras & Perintah Dasar Sistem Operasi
+> **Mata Kuliah :** Sistem Operasi  
+> **Nama :** Ibni Andarta<br>
+> **NIM :** 25410702058<br>
+> **Kelas :** TI-1G/13
 
 ---
 
@@ -548,6 +550,4 @@ Tidak ada layanan yang gagal (`0 loaded units listed`).
   - Status terakhir: scheduler berjalan dengan pesan `Scheduler is running...`
 
 ---
-
-## Penutup
-Dokumen ini adalah versi tampilan ulang dari `report.md` dengan isi inti yang tetap sama, namun disajikan lebih terstruktur dan mudah dibaca.
+*Jobsheet 2 - Manajemen Perangkat Keras & Perintah Dasar Sistem Operasi*
