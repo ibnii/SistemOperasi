@@ -10,26 +10,6 @@
 | :--- | :--- | :--- |
 | Ibni Andarta | 254107020258 | TI-1G |
 
-## Daftar Isi
-1. Praktikum 6.1
-2. Praktikum 6.2
-3. Praktikum 6.3
-4. Praktikum 6.4
-5. Praktikum 6.5
-6. Praktikum 6.6
-7. Praktikum 6.7
-8. Praktikum 6.8
-9. Praktikum 6.9
-10. Praktikum 6.10
-11. Praktikum 6.11
-12. Praktikum 6.12
-13. Praktikum 6.13
-14. Praktikum 6.14
-15. Tugas Praktikum 1
-16. Tugas Praktikum 2
-17. Tugas Praktikum 3
-18. Tugas Praktikum 4
-
 ---
 
 
