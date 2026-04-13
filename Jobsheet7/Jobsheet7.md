@@ -525,6 +525,688 @@ ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ cat ~/praktikum
   164  history | tail -n 20 > ~/praktikum-os/week07/diag-history.txt
 ```
 
+---
+## Praktikum 6.11
+### Masuk ke direktori sampel
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ ls
+app.conf  backup-01.tar  backup-02.tar  catatan-a.txt  catatan-b.txt  laporan-bulanan.log  laporan-harian.log  laporan-mingguan.log
+```
+
+### Coba beberapa pola wildcard
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ ls *.log
+laporan-bulanan.log  laporan-harian.log  laporan-mingguan.log
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ ls catatan-?.txt
+catatan-a.txt  catatan-b.txt
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ ls backup-0[12].tar
+backup-01.tar  backup-02.tar
+```
+
+### Coba beberapa ekspansi lain
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ echo log-{pagi,siang,malam}.txt
+log-pagi.txt log-siang.txt log-malam.txt
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ echo ~
+/home/ibennn
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ echo ~/praktikum-os/week07
+/home/ibennn/praktikum-os/week07
+```
+
+---
+## Praktikum 6.12
+### Siapkan file log tambahan
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/sampel$ cd ~/praktikum-os/week07/logs
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ touch access-01.log access-02.log access-03.log
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ ls
+access-01.log  access-02.log  access-03.log  app-01.log  app-02.log  app-03.log
+```
+
+### Preview file yang akan diproses
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ echo *.log
+access-01.log access-02.log access-03.log app-01.log app-02.log app-03.log
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ echo access-0?.log
+access-01.log access-02.log access-03.log
+```
+
+### Pindahkan semua file log ke folder arsip
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ mkdir -p arsip-log
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ mv *.log arsip-log/
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ ls arsip-log
+access-01.log  access-02.log  access-03.log  app-01.log  app-02.log  app-03.log
+```
+
+### Kompres folder arsip
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ tar -czf "arsip-log-$(date +%F).tar.gz" arsip-log
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ ls -lah
+total 16K
+drwxrwxr-x 3 ibennn ibennn 4.0K Apr 13 13:16 .
+drwxrwxr-x 7 ibennn ibennn 4.0K Apr 11 12:43 ..
+drwxrwxr-x 2 ibennn ibennn 4.0K Apr 13 13:15 arsip-log
+-rw-rw-r-- 1 ibennn ibennn  223 Apr 13 13:16 arsip-log-2026-04-13.tar.gz
+```
+
+---
+## Praktikum 6.13
+### Uji single quote dan double quote
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ echo '$USER bekerja di $HOME'
+$USER bekerja di $HOME
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ echo "$USER bekerja di $HOME"
+ibennn bekerja di /home/ibennn
+```
+
+### Uji escape karakter spasi
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ cd ~/praktikum-os/week07/ruang-nama
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ ls "laporan server april.txt"
+'laporan server april.txt'
+```
+
+### Uji akses file yang sama dengan double quote
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/logs$ cd ~/praktikum-os/week07/ruang-nama
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ ls "laporan server april.txt"
+'laporan server april.txt'
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ cat "laporan server april.txt"
+```
+
+---
+## Praktikum 6.14
+### Pastikan file target tersedia
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ cd ~/praktikum-os/week07/ruang-nama
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ ls -lah
+total 8.0K
+drwxrwxr-x 2 ibennn ibennn 4.0K Apr 11 11:54  .
+drwxrwxr-x 7 ibennn ibennn 4.0K Apr 11 12:43  ..
+-rw-rw-r-- 1 ibennn ibennn    0 Apr 11 11:54 'backup [mingguan] server.conf'
+-rw-rw-r-- 1 ibennn ibennn    0 Apr 11 11:54 'laporan server april.txt'
+```
+
+### Salin file dengan nama kompleks ke folder backup
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ cp -- "backup [mingguan] server.conf" "$HOME/praktikum-os/week07/backup/backup-mingguan-server.conf"
+```
+
+### Gunakan variabel untuk memproses path dengan aman:
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ cp -- "backup [mingguan] server.conf" "$HOME/praktikum-os/week07/backup/backup-mingguan-server.conf"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ file_asli="$HOME/praktikum-os/week07/ruang-nama/backup [mingguan] server.conf"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ file_salinan="$HOME/praktikum-os/week07/backup/backup-mingguan-server-v2.conf"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ cp -- "$file_asli" "$file_salinan"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ ls -lah "$HOME/praktikum-os/week07/backup"
+total 12K
+drwxrwxr-x 2 ibennn ibennn 4.0K Apr 13 13:24 .
+drwxrwxr-x 7 ibennn ibennn 4.0K Apr 11 12:43 ..
+-rw-rw-r-- 1 ibennn ibennn    0 Apr 13 13:24 backup-mingguan-server-v2.conf
+-rw-rw-r-- 1 ibennn ibennn    0 Apr 13 13:23 backup-mingguan-server.conf
+-rw-rw-r-- 1 ibennn ibennn   10 Apr 11 12:32 sample-app.conf.2026-04-11-123234.bak
+```
+
+### Tampilkan daftar file hasil backup:
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/ruang-nama$ for file in "$HOME/praktikum-os/week07/backup"/*; do
+    printf 'Hasil backup: %s\n' "$file"
+done
+
+Hasil backup: /home/ibennn/praktikum-os/week07/backup/backup-mingguan-server.conf
+Hasil backup: /home/ibennn/praktikum-os/week07/backup/backup-mingguan-server-v2.conf
+Hasil backup: /home/ibennn/praktikum-os/week07/backup/sample-app.conf.2026-04-11-123234.bak
+```
+---
+## Tugas Praktikum 1
+Jawaban : 
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ mkdir -p ~/bin
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ export PATH="$HOME/bin:$PATH"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ alias ll='ls -lah'
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ alias cek-disk='df -h | grep "^/dev/"'
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ quick-zip() {
+    tar -czf "$1.tar.gz" "$1" && echo "File $1 berhasil di-zip."
+}
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ source ~/.bashrc
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ cat << 'EOF' > ~/bin/spek
+> echo "--- RINGKASAN SISTEM ---"
+echo "User    : $(whoami)"
+echo "Uptime  : $(uptime -p)"
+echo "Memory  : $(free -h | grep Mem | awk '{print $3 "/" $2}')"
+EOF
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ chmod +x ~/bin/spek
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ cd /tmp
+ibennn@ibennn-QEMU-Virtual-Machine:/tmp$ echo "--- LAPORAN TOOLKIT BASH ---" > ~/toolkit-bash-report.txt
+echo -e "\n1. Output PATH:" >> ~/toolkit-bash-report.txt
+echo $PATH >> ~/toolkit-bash-report.txt
+ibennn@ibennn-QEMU-Virtual-Machine:/tmp$ echo -e "\n2. Verifikasi Alias (ll):" >> ~/toolkit-bash-report.txt
+type ll >> ~/toolkit-bash-report.txt
+ibennn@ibennn-QEMU-Virtual-Machine:/tmp$ echo -e "\n3. Verifikasi Fungsi (quick-zip):" >> ~/toolkit-bash-report.txt
+type quick-zip >> ~/toolkit-bash-report.txt
+ibennn@ibennn-QEMU-Virtual-Machine:/tmp$ echo -e "\n4. Verifikasi Script (spek):" >> ~/toolkit-bash-report.txt
+type spek >> ~/toolkit-bash-report.txt
+ibennn@ibennn-QEMU-Virtual-Machine:/tmp$ echo -e "\n5. Eksekusi Script dari direktori $(pwd):" >> ~/toolkit-bash-report.txt
+spek >> ~/toolkit-bash-report.txt
+ibennn@ibennn-QEMU-Virtual-Machine:/tmp$ cat ~/toolkit-bash-report.txt
+--- LAPORAN TOOLKIT BASH ---
+
+1. Output PATH:
+/home/ibennn/praktikum-os/week07/bin:/home/ibennn/bin:/home/ibennn/praktikum-os/week07/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+
+2. Verifikasi Alias (ll):
+ll is aliased to `ls -lah --color=auto'
+
+3. Verifikasi Fungsi (quick-zip):
+quick-zip is a function
+quick-zip () 
+{ 
+    tar -czf "$1.tar.gz" "$1" && echo "File $1 berhasil di-zip."
+}
+
+4. Verifikasi Script (spek):
+spek is /home/ibennn/bin/spek
+
+5. Eksekusi Script dari direktori /tmp:
+--- RINGKASAN SISTEM ---
+User    : ibennn
+Uptime  : up 55 minutes
+Memory  : 1.3Gi/3.3Gi
+```
 
 
+---
+## Tugas Praktikum 2
+Jawaban : 
 
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ LAPORAN="audit-konfigurasi-$(date +%F).txt"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ ERROR_LOG="audit-error.log"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ find /etc -name "*.conf" > "$LAPORAN" 2> "$ERROR_LOG"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ JUMLAH=$(wc -l < "$LAPORAN")
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ echo -e "\n--- RINGKASAN AUDIT ---" | tee -a "$LAPORAN"
+
+--- RINGKASAN AUDIT ---
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ echo "Total file ditemukan: $JUMLAH" | tee -a "$LAPORAN"
+Total file ditemukan: 316
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ echo "Error dicatat di    : $ERROR_LOG" | tee -a "$LAPORAN"
+Error dicatat di    : audit-error.log
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ cat <<EOF >> "$LAPORAN"
+> ANALISIS SINGKAT:
+Pemisahan stdout (>) dan stderr (2>) penting agar daftar konfigurasi tidak kotor oleh pesan error. 
+Hal ini memudahkan penghitungan file dan memastikan log error tersimpan khusus untuk pengecekan hak akses.
+EOF
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ cat "$LAPORAN"
+/etc/PackageKit/PackageKit.conf
+/etc/PackageKit/Vendor.conf
+/etc/udisks2/udisks2.conf
+/etc/libao.conf
+/etc/cups/snmp.conf
+/etc/cups/cupsd.conf
+/etc/cups/cups-files.conf
+/etc/cups/subscriptions.conf
+/etc/cups/cups-browsed.conf
+/etc/gtk-3.0/im-multipress.conf
+/etc/gtk-2.0/im-multipress.conf
+/etc/ubuntu-advantage/uaclient.conf
+/etc/usb_modeswitch.conf
+/etc/environment.d/90qt-a11y.conf
+/etc/environment.d/90atk-adaptor.conf
+/etc/ssh/ssh_config.d/20-systemd-ssh-proxy.conf
+/etc/xattr.conf
+/etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+/etc/NetworkManager/NetworkManager.conf
+/etc/dbus-1/system.d/com.ubuntu.WhoopsiePreferences.conf
+/etc/dbus-1/system.d/com.redhat.NewPrinterNotification.conf
+/etc/dbus-1/system.d/com.hp.hplip.conf
+/etc/dbus-1/system.d/org.opensuse.CupsPkHelper.Mechanism.conf
+/etc/dbus-1/system.d/com.ubuntu.LanguageSelector.conf
+/etc/dbus-1/system.d/com.redhat.PrinterDriversInstaller.conf
+/etc/dbus-1/system.d/org.debian.apt.conf
+/etc/dbus-1/system.d/com.ubuntu.SoftwareProperties.conf
+/etc/ca-certificates.conf
+/etc/mke2fs.conf
+/etc/UPower/UPower.conf
+/etc/chrony/conf.d/ubuntu-nts.conf
+/etc/chrony/chrony.conf
+/etc/cracklib/cracklib.conf
+/etc/updatedb.conf
+/etc/libaudit.conf
+/etc/debconf.conf
+/etc/nftables.conf
+/etc/vconsole.conf
+/etc/rsyslog.d/50-default.conf
+/etc/rsyslog.d/21-cloudinit.conf
+/etc/rsyslog.d/20-ufw.conf
+/etc/tmpfiles.d/screen-cleanup.conf
+/etc/dhcpcd.conf
+/etc/init/whoopsie.conf
+/etc/sudo_logsrvd.conf
+/etc/avahi/avahi-daemon.conf
+/etc/ufw/ufw.conf
+/etc/ufw/sysctl.conf
+/etc/resolv.conf
+/etc/ipp-usb/ipp-usb.conf
+/etc/pnm2ppa.conf
+/etc/adduser.conf
+/etc/rygel.conf
+/etc/snmp/snmp.conf
+/etc/selinux/semanage.conf
+/etc/sensors3.conf
+/etc/ldap/ldap.conf
+/etc/udev/udev.conf
+/etc/udev/iocost.conf
+/etc/speech-dispatcher/modules/espeak-ng.conf
+/etc/speech-dispatcher/modules/cicero.conf
+/etc/speech-dispatcher/modules/llia_phon-generic.conf
+/etc/speech-dispatcher/modules/dtk-generic.conf
+/etc/speech-dispatcher/modules/espeak.conf
+/etc/speech-dispatcher/modules/festival.conf
+/etc/speech-dispatcher/modules/flite.conf
+/etc/speech-dispatcher/modules/espeak-ng-mbrola-generic.conf
+/etc/speech-dispatcher/modules/mary-generic.conf
+/etc/speech-dispatcher/modules/openjtalk.conf
+/etc/speech-dispatcher/modules/espeak-ng-mbrola.conf
+/etc/speech-dispatcher/modules/epos-generic.conf
+/etc/speech-dispatcher/modules/mimic3-generic.conf
+/etc/speech-dispatcher/modules/espeak-mbrola-generic.conf
+/etc/speech-dispatcher/modules/swift-generic.conf
+/etc/speech-dispatcher/speechd.conf
+/etc/speech-dispatcher/clients/emacs.conf
+/etc/ld.so.conf
+/etc/plymouth/plymouthd.conf
+/etc/initramfs-tools/initramfs.conf
+/etc/ghostscript/fontmap.d/10fonts-urw-base35.conf
+/etc/ghostscript/cidfmap.d/90gs-cjk-resource-japan2.conf
+/etc/ghostscript/cidfmap.d/90gs-cjk-resource-korea1.conf
+/etc/ghostscript/cidfmap.d/90gs-cjk-resource-japan1.conf
+/etc/ghostscript/cidfmap.d/90gs-cjk-resource-cns1.conf
+/etc/ghostscript/cidfmap.d/90gs-cjk-resource-gb1.conf
+/etc/ld.so.conf.d/libc.conf
+/etc/ld.so.conf.d/aarch64-linux-gnu.conf
+/etc/xdg/user-dirs.conf
+/etc/host.conf
+/etc/locale.conf
+/etc/pulse/client.conf
+/etc/rsyslog.conf
+/etc/apt/apt.conf.d/20apt-esm-hook.conf
+/etc/apt/apt.conf.d/20snapd.conf
+/etc/logrotate.conf
+/etc/modprobe.d/blacklist-oss.conf
+/etc/modprobe.d/blacklist-framebuffer.conf
+/etc/modprobe.d/blacklist.conf
+/etc/modprobe.d/blacklist-modem.conf
+/etc/modprobe.d/iwlwifi.conf
+/etc/modprobe.d/alsa-base.conf
+/etc/modprobe.d/blacklist-firewire.conf
+/etc/modprobe.d/blacklist-ath_pci.conf
+/etc/modprobe.d/blacklist-rare-network.conf
+/etc/fprintd.conf
+/etc/bluetooth/input.conf
+/etc/bluetooth/network.conf
+/etc/bluetooth/main.conf
+/etc/systemd/logind.conf
+/etc/systemd/system.conf
+/etc/systemd/resolved.conf
+/etc/systemd/journald.conf
+/etc/systemd/oomd.conf
+/etc/systemd/sleep.conf
+/etc/systemd/networkd.conf
+/etc/systemd/user.conf
+/etc/systemd/pstore.conf
+/etc/deluser.conf
+/etc/ucf.conf
+/etc/e2scrub.conf
+/etc/apparmor/parser.conf
+/etc/gdm3/custom.conf
+/etc/kdump/sysctl.conf
+/etc/apport/crashdb.conf
+/etc/modules-load.d/modules.conf
+/etc/pam.conf
+/etc/fonts/fonts.conf
+/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-serif.conf
+/etc/fonts/conf.avail/30-droid-noto.conf
+/etc/fonts/conf.avail/20-unhint-small-dejavu-sans.conf
+/etc/fonts/conf.avail/58-dejavu-lgc-sans-mono.conf
+/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans-mono.conf
+/etc/fonts/conf.avail/20-unhint-small-dejavu-sans-mono.conf
+/etc/fonts/conf.avail/20-unhint-small-dejavu-serif.conf
+/etc/fonts/conf.avail/65-droid-sans-fallback.conf
+/etc/fonts/conf.avail/57-dejavu-serif.conf
+/etc/fonts/conf.avail/58-dejavu-lgc-serif.conf
+/etc/fonts/conf.avail/57-dejavu-sans-mono.conf
+/etc/fonts/conf.avail/57-dejavu-sans.conf
+/etc/fonts/conf.avail/20-unhint-small-dejavu-lgc-sans.conf
+/etc/fonts/conf.avail/58-dejavu-lgc-sans.conf
+/etc/fonts/conf.avail/30-droid-noto-mono.conf
+/etc/fonts/conf.d/10-scale-bitmap-fonts.conf
+/etc/fonts/conf.d/61-urw-standard-symbols-ps.conf
+/etc/fonts/conf.d/69-language-selector-zh-tw.conf
+/etc/fonts/conf.d/20-unhint-small-dejavu-lgc-serif.conf
+/etc/fonts/conf.d/49-sansserif.conf
+/etc/fonts/conf.d/60-generic.conf
+/etc/fonts/conf.d/20-unhint-small-dejavu-sans.conf
+/etc/fonts/conf.d/58-dejavu-lgc-sans-mono.conf
+/etc/fonts/conf.d/61-urw-nimbus-roman.conf
+/etc/fonts/conf.d/10-hinting-slight.conf
+/etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans-mono.conf
+/etc/fonts/conf.d/61-urw-gothic.conf
+/etc/fonts/conf.d/48-spacing.conf
+/etc/fonts/conf.d/61-urw-fallback-backwards.conf
+/etc/fonts/conf.d/40-nonlatin.conf
+/etc/fonts/conf.d/10-sub-pixel-rgb.conf
+/etc/fonts/conf.d/61-urw-d050000l.conf
+/etc/fonts/conf.d/69-language-selector-zh-cn.conf
+/etc/fonts/conf.d/20-unhint-small-dejavu-sans-mono.conf
+/etc/fonts/conf.d/60-latin.conf
+/etc/fonts/conf.d/69-unifont.conf
+/etc/fonts/conf.d/45-generic.conf
+/etc/fonts/conf.d/65-fonts-persian.conf
+/etc/fonts/conf.d/90-synthetic.conf
+/etc/fonts/conf.d/64-language-selector-cjk-prefer.conf
+/etc/fonts/conf.d/61-urw-p052.conf
+/etc/fonts/conf.d/99-language-selector-zh.conf
+/etc/fonts/conf.d/61-urw-bookman.conf
+/etc/fonts/conf.d/80-delicious.conf
+/etc/fonts/conf.d/70-no-bitmaps-except-emoji.conf
+/etc/fonts/conf.d/61-urw-nimbus-sans.conf
+/etc/fonts/conf.d/70-fonts-noto-cjk.conf
+/etc/fonts/conf.d/51-local.conf
+/etc/fonts/conf.d/20-unhint-small-dejavu-serif.conf
+/etc/fonts/conf.d/45-latin.conf
+/etc/fonts/conf.d/65-droid-sans-fallback.conf
+/etc/fonts/conf.d/61-urw-nimbus-mono-ps.conf
+/etc/fonts/conf.d/57-dejavu-serif.conf
+/etc/fonts/conf.d/58-dejavu-lgc-serif.conf
+/etc/fonts/conf.d/71-ubuntulegacy.conf
+/etc/fonts/conf.d/65-nonlatin.conf
+/etc/fonts/conf.d/69-language-selector-zh-sg.conf
+/etc/fonts/conf.d/30-metric-aliases.conf
+/etc/fonts/conf.d/57-dejavu-sans-mono.conf
+/etc/fonts/conf.d/69-language-selector-zh-mo.conf
+/etc/fonts/conf.d/30-cjk-aliases.conf
+/etc/fonts/conf.d/10-yes-antialias.conf
+/etc/fonts/conf.d/57-dejavu-sans.conf
+/etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans.conf
+/etc/fonts/conf.d/20-unhint-small-vera.conf
+/etc/fonts/conf.d/11-lcdfilter-default.conf
+/etc/fonts/conf.d/69-language-selector-zh-hk.conf
+/etc/fonts/conf.d/61-urw-z003.conf
+/etc/fonts/conf.d/61-urw-fallback-generics.conf
+/etc/fonts/conf.d/69-language-selector-ja.conf
+/etc/fonts/conf.d/56-language-selector-prefer.conf
+/etc/fonts/conf.d/58-dejavu-lgc-sans.conf
+/etc/fonts/conf.d/61-urw-c059.conf
+/etc/fonts/conf.d/50-user.conf
+/etc/fonts/snap-override/10-prefer-noto.conf
+/etc/brltty.conf
+/etc/geoclue/geoclue.conf
+/etc/nsswitch.conf
+/etc/gai.conf
+/etc/hp/hplip.conf
+/etc/depmod.d/ubuntu.conf
+/etc/dracut.conf
+/etc/fwupd/fwupd.conf
+/etc/fwupd/remotes.d/lvfs-testing.conf
+/etc/fwupd/remotes.d/vendor-directory.conf
+/etc/fwupd/remotes.d/lvfs.conf
+/etc/fuse.conf
+/etc/security/access.conf
+/etc/security/capability.conf
+/etc/security/namespace.conf
+/etc/security/pwquality.conf
+/etc/security/time.conf
+/etc/security/sepermit.conf
+/etc/security/limits.conf
+/etc/security/faillock.conf
+/etc/security/pam_env.conf
+/etc/security/pwhistory.conf
+/etc/security/group.conf
+/etc/security/limits.d/10-gamemode.conf
+/etc/security/limits.d/25-pw-rlimits.conf
+/etc/security/limits.d/10-coredump-debian.conf
+/etc/hdparm.conf
+/etc/sane.d/leo.conf
+/etc/sane.d/coolscan.conf
+/etc/sane.d/epjitsu.conf
+/etc/sane.d/u12.conf
+/etc/sane.d/s9036.conf
+/etc/sane.d/qcam.conf
+/etc/sane.d/dll.conf
+/etc/sane.d/umax.conf
+/etc/sane.d/test.conf
+/etc/sane.d/pie.conf
+/etc/sane.d/umax_pp.conf
+/etc/sane.d/net.conf
+/etc/sane.d/cardscan.conf
+/etc/sane.d/gphoto2.conf
+/etc/sane.d/hp5400.conf
+/etc/sane.d/matsushita.conf
+/etc/sane.d/mustek_usb.conf
+/etc/sane.d/artec_eplus48u.conf
+/etc/sane.d/dc240.conf
+/etc/sane.d/stv680.conf
+/etc/sane.d/ma1509.conf
+/etc/sane.d/artec.conf
+/etc/sane.d/canon.conf
+/etc/sane.d/sm3840.conf
+/etc/sane.d/saned.conf
+/etc/sane.d/snapscan.conf
+/etc/sane.d/sharp.conf
+/etc/sane.d/abaton.conf
+/etc/sane.d/kodakaio.conf
+/etc/sane.d/teco3.conf
+/etc/sane.d/p5.conf
+/etc/sane.d/st400.conf
+/etc/sane.d/canon_dr.conf
+/etc/sane.d/gt68xx.conf
+/etc/sane.d/v4l.conf
+/etc/sane.d/teco1.conf
+/etc/sane.d/dell1600n_net.conf
+/etc/sane.d/dmc.conf
+/etc/sane.d/mustek_pp.conf
+/etc/sane.d/nec.conf
+/etc/sane.d/coolscan3.conf
+/etc/sane.d/avision.conf
+/etc/sane.d/canon_lide70.conf
+/etc/sane.d/microtek2.conf
+/etc/sane.d/kvs1025.conf
+/etc/sane.d/magicolor.conf
+/etc/sane.d/airscan.conf
+/etc/sane.d/canon630u.conf
+/etc/sane.d/canon_pp.conf
+/etc/sane.d/microtek.conf
+/etc/sane.d/genesys.conf
+/etc/sane.d/hp3900.conf
+/etc/sane.d/xerox_mfp.conf
+/etc/sane.d/tamarack.conf
+/etc/sane.d/fujitsu.conf
+/etc/sane.d/lexmark_x2600.conf
+/etc/sane.d/agfafocus.conf
+/etc/sane.d/rts8891.conf
+/etc/sane.d/pixma.conf
+/etc/sane.d/sceptre.conf
+/etc/sane.d/sp15c.conf
+/etc/sane.d/hp.conf
+/etc/sane.d/apple.conf
+/etc/sane.d/epson.conf
+/etc/sane.d/plustek.conf
+/etc/sane.d/lexmark.conf
+/etc/sane.d/teco2.conf
+/etc/sane.d/pieusb.conf
+/etc/sane.d/hp4200.conf
+/etc/sane.d/escl.conf
+/etc/sane.d/mustek.conf
+/etc/sane.d/epson2.conf
+/etc/sane.d/bh.conf
+/etc/sane.d/coolscan2.conf
+/etc/sane.d/kodak.conf
+/etc/sane.d/hpsj5s.conf
+/etc/sane.d/plustek_pp.conf
+/etc/sane.d/ibm.conf
+/etc/sane.d/umax1220u.conf
+/etc/sane.d/dc210.conf
+/etc/sane.d/hs2p.conf
+/etc/sane.d/dc25.conf
+/etc/sane.d/ricoh.conf
+/etc/sane.d/epsonds.conf
+/etc/alsa/conf.d/50-pipewire.conf
+/etc/alsa/conf.d/99-pipewire-default.conf
+/etc/sudo.conf
+
+--- RINGKASAN AUDIT ---
+Total file ditemukan: 316
+Error dicatat di    : audit-error.log
+ANALISIS SINGKAT:
+Pemisahan stdout (>) dan stderr (2>) penting agar daftar konfigurasi tidak kotor oleh pesan error. 
+Hal ini memudahkan penghitungan file dan memastikan log error tersimpan khusus untuk pengecekan hak akses.
+```
+
+---
+## Tugas Praktikum 3
+Jawaban : 
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ cat << 'EOF' > ~/bin/daily-healthcheck
+> LOG_FILE="$HOME/healthcheck-$(date +%F).log"
+> header() {
+    echo -e "\n=============================="
+    echo " $1"
+    echo "=============================="
+}
+> {
+    header "WAKTU & IDENTITAS"
+    echo "Waktu    : $(date)"
+    echo "Hostname : $HOSTNAME"
+    echo "User     : $USER"
+    echo "Shell    : $SHELL"
+
+    header "STATUS SISTEM"
+    echo "Uptime   :"
+    uptime -p
+    echo -e "\nMemori   :"
+    free -h
+    echo -e "\nDisk Root (/):"
+    df -h / | grep "^/"
+
+    header "RIWAYAT PERINTAH TERAKHIR"
+    history 10
+} | tee "$LOG_FILE"
+> if [ ${PIPESTATUS[0]} -eq 0 ]; then
+    echo -e "\n[SUKSES] Laporan disimpan di: $LOG_FILE"
+else
+    echo -e "\n[GAGAL] Terjadi kesalahan saat pengambilan data." >&2
+fi
+EOF
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ chmod +x ~/bin/daily-healthcheck
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ daily-healthcheck
+daily-healthcheck: command not found
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ ls
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ source ~/.bashrc
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ daily-healthcheck
+daily-healthcheck: command not found
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ export PATH="$HOME/bin:$PATH"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ daily-healthcheck
+
+==============================
+ WAKTU & IDENTITAS
+==============================
+Waktu    : Mon Apr 13 13:56:17 WIB 2026
+Hostname : ibennn-QEMU-Virtual-Machine
+User     : ibennn
+Shell    : /bin/bash
+
+==============================
+ STATUS SISTEM
+==============================
+Uptime   :
+up 59 minutes
+
+Memori   :
+               total        used        free      shared  buff/cache   available
+Mem:           3.3Gi       1.3Gi       580Mi        80Mi       1.7Gi       2.0Gi
+Swap:          3.8Gi          0B       3.8Gi
+
+Disk Root (/):
+/dev/vda2        24G   13G   10G  56% /
+
+==============================
+ RIWAYAT PERINTAH TERAKHIR
+==============================
+  216  cd praktikum3
+  217  clear
+  218  cat << 'EOF' > ~/bin/daily-healthcheck
+LOG_FILE="$HOME/healthcheck-$(date +%F).log"
+header() {
+    echo -e "\n=============================="
+    echo " $1"
+    echo "=============================="
+}
+{
+    header "WAKTU & IDENTITAS"
+    echo "Waktu    : $(date)"
+    echo "Hostname : $HOSTNAME"
+    echo "User     : $USER"
+    echo "Shell    : $SHELL"
+
+    header "STATUS SISTEM"
+    echo "Uptime   :"
+    uptime -p
+    echo -e "\nMemori   :"
+    free -h
+    echo -e "\nDisk Root (/):"
+    df -h / | grep "^/"
+
+    header "RIWAYAT PERINTAH TERAKHIR"
+    history 10
+} | tee "$LOG_FILE"
+if [ ${PIPESTATUS[0]} -eq 0 ]; then
+    echo -e "\n[SUKSES] Laporan disimpan di: $LOG_FILE"
+else
+    echo -e "\n[GAGAL] Terjadi kesalahan saat pengambilan data." >&2
+fi
+EOF
+
+  219  chmod +x ~/bin/daily-healthcheck
+  220  daily-healthcheck
+  221  ls
+  222  source ~/.bashrc
+  223  daily-healthcheck
+  224  export PATH="$HOME/bin:$PATH"
+  225  daily-healthcheck
+
+[SUKSES] Laporan disimpan di: /home/ibennn/healthcheck-2026-04-13.log
+```
+---
+## Tugas Praktikum 4
+Jawaban : 
+```bash
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ touch "laporan bulanan.txt"
+touch "backup [utama] config.conf"
+touch "data-01.log"
+touch "data-02.log"
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ ls -F
+'backup [utama] config.conf'   data-01.log   data-02.log  'laporan bulanan.txt'
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ ls laporan bulanan.txt
+ls: cannot access 'laporan': No such file or directory
+ls: cannot access 'bulanan.txt': No such file or directory
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ ls "laporan bulanan.txt"
+'laporan bulanan.txt'
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ echo *.log
+data-01.log data-02.log
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ echo "backup [utama] config.conf"
+backup [utama] config.conf
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ mkdir -p ../backup-aman
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ for file in *; do
+    cp -- "$file" "../backup-aman/"
+done
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ cd ..
+tar -czf "arsip-praktikum-$(date +%F).tar.gz" backup-aman
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum$ history | tail -n 20 > riwayat-arsip.txt
+ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum$ cat << 'EOF' > refleksi-quoting.txt
+PENTINGNYA QUOTING DI BASH:
+1. Menghindari "Word Splitting": Tanpa kutip, spasi dalam nama file dianggap sebagai pemisah argumen.
+2. Mencegah Interpretasi Wildcard: Karakter seperti [ ] atau * bisa disalahartikan oleh shell jika tidak dilindungi kutip.
+3. Keamanan Variabel: Menggunakan "$file" memastikan isi variabel diproses secara utuh meskipun mengandung karakter aneh.
+EOF
+```
