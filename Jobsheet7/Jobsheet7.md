@@ -1,14 +1,41 @@
-# Jobsheet 7
+# Jobsheet 7 - Sistem Operasi
 
+```text
++-----------------------------------------------------------+
+| JOBSHEET 7 | SHELL & BASH WORKFLOW                        |
++-----------------------------------------------------------+
+```
+## Identitas
 | Nama | NIM | Kelas |
 | :--- | :--- | :--- |
 | Ibni Andarta | 254107020258 | TI-1G |
 
+## Daftar Isi
+1. Praktikum 6.1
+2. Praktikum 6.2
+3. Praktikum 6.3
+4. Praktikum 6.4
+5. Praktikum 6.5
+6. Praktikum 6.6
+7. Praktikum 6.7
+8. Praktikum 6.8
+9. Praktikum 6.9
+10. Praktikum 6.10
+11. Praktikum 6.11
+12. Praktikum 6.12
+13. Praktikum 6.13
+14. Praktikum 6.14
+15. Tugas Praktikum 1
+16. Tugas Praktikum 2
+17. Tugas Praktikum 3
+18. Tugas Praktikum 4
+
 ---
+
 
 ## Praktikum 6.1 
 ### Lihat shell login dan shell aktif saat ini
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ echo " Shell login : $SHELL " 
  Shell login : /bin/bash 
@@ -20,8 +47,9 @@ ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ bash --version | head 
 GNU bash, version 5.2.37(1)-release (aarch64-unknown-linux-gnu)
 ```
 
+
 ### Lihat proses shell yang sedang berjalan
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ echo $$
 3213
@@ -30,8 +58,9 @@ ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ ps -p $$ -o pid,ppid,a
    3213    3173 /usr/bin/bash
 ```
 
+
 ### Buat workspace praktikum
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ mkdir -p {bin,backup,logs,sampel,ruang-nama}
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ pwd
@@ -40,8 +69,9 @@ ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ ls
 backup  bin  logs  ruang-nama  sampel
 ```
 
+
 ### Buat beberapa file contoh yang akan dipakai pada praktikum berikutnya
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ touch sampel/app.conf
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ touch logs/app-01.log logs/app-02.log logs/app-03.log
@@ -69,10 +99,11 @@ app.conf  backup-01.tar  backup-02.tar  catatan-a.txt  catatan-b.txt  laporan-bu
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ 
 ```
 
+
 ---
 ## Praktikum 6.2
 ### Simpan informasi sesi terminal ke file laporan
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ {
   echo "=== RINGKASAN SESI BASH ==="
@@ -94,8 +125,9 @@ PID shell    : 3213
 Direktori    : /home/ibennn/praktikum-os/week07
 ```
 
+
 ### Verifikasi isi file laporan
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ cat session-info.txt
 === RINGKASAN SESI BASH ===
@@ -107,30 +139,34 @@ Shell aktif  : /usr/bin/bash
 PID shell    : 3213
 Direktori    : /home/ibennn/praktikum-os/week07
 ```
+
 ---
 ## Praktikum 6.3
 ### Lihat file konfigurasi Bash pada home directory
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ ls -la ~ | grep -E 'bashrc|bash_profile|profile'
 -rw-r--r--  1 ibennn ibennn 3771 Sep  8  2025 .bashrc
 -rw-r--r--  1 ibennn ibennn  807 Sep  8  2025 .profile
 ```
+
 ### Buat backup .bashrc
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ cp ~/.bashrc ~/.bashrc.bak-praktikum
 ```
+
 ### Tambahkan blok konfigurasi praktikum
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ cat << 'EOF' >> ~/.bashrc
 export PRAKTIKUM_BASH_DIR="$HOME/praktikum-os/week07"
 export EDITOR=nano
 EOF
 ```
+
 ### Terapkan konfigurasi tanpa logout
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ source ~/.bashrc
 echo "$PRAKTIKUM_BASH_DIR"
@@ -139,16 +175,18 @@ echo "$EDITOR"
 nano
 ```
 
+
 ---
 ## Praktikum 6.4 
 ### Backup .bash_profile jika sudah ada
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ [ -f ~/.bash_profile ] && cp ~/.bash_profile ~/.bash_profile.bak-praktikum
 ```
 
+
 ### Tambahkan konfigurasi login shell
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ cat << 'EOF' >> ~/.bash_profile
 if [ -f ~/.bashrc ]; then
@@ -159,8 +197,9 @@ echo "Login Bash pada $(date '+%F %T')" >> "$HOME/praktikum-os/week07/login-audi
 EOF
 ```
 
+
 ### Uji dengan membuka login shell baru
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ bash -l
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ tail -n 3 ~/praktikum-os/week07/login-audit.log
@@ -169,26 +208,29 @@ ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ exit
 logout
 ```
 
+
 ---
 ## Praktikum 6.5
 ### Buat variabel lokal
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ KELAS_OS="Sistem Operasi A"
 echo "$KELAS_OS"
 Sistem Operasi A
 ```
 
+
 ### Buka subshell dan cek apakah variabel masih ada
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ bash
 echo " $KELAS_OS "
 exit
 ```
 
+
 ### Sekarang ubah menjadi environment variable
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ export KELAS_OS="Sistem Operasi A"
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ bash
@@ -198,8 +240,9 @@ ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ exit
 exit
 ```
 
+
 ### Lihat isi PATH dan lokasi beberapa perintah
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ echo "$PATH"
 which bash
@@ -209,16 +252,18 @@ type ls
 ls is aliased to `ls --color=auto'
 ```
 
+
 ---
 ## Praktikum 6.6
 ### Pastikan direktori bin praktikum tersedia
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ mkdir -p ~/praktikum-os/week07/bin
 ```
 
+
 ### Tambahkan direktori tersebut ke PATH melalui .bashrc
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ cat << 'EOF' >> ~/.bashrc
 export PATH="$HOME/praktikum-os/week07/bin:$PATH"
@@ -230,8 +275,9 @@ echo "$PATH"
 /home/ibennn/praktikum-os/week07/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
 ```
 
+
 ### Buat script ringkasan sistem
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ cat << 'EOF' > ~/praktikum-os/week07/bin/ringkas-sistem
 > echo "Hostname : $(hostname)"
@@ -243,8 +289,9 @@ EOF
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ chmod +x ~/praktikum-os/week07/bin/ringkas-sistem
 ```
 
+
 ### Jalankan script dari direktori yang berbeda
-Output :
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07$ cd ~
 ringkas-sistem
@@ -256,10 +303,11 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/vda2        24G   13G   11G  55% /
 ```
 
+
 ---
 ## Praktikum 6.7
 ### Tambahkan alias ke .bashrc
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~$ cat << 'EOF' >> ~/.bashrc
 alias ll='ls -lah --color=auto'
@@ -269,8 +317,9 @@ EOF
 source ~/.bashrc
 ```
 
+
 ### Uji alias
-Output : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~$ ll
 total 136K
@@ -320,6 +369,7 @@ EOF
   137  ll
   138  hist10
 ```
+
 
 ---
 ## Praktikum 6.8
@@ -660,7 +710,7 @@ Hasil backup: /home/ibennn/praktikum-os/week07/backup/sample-app.conf.2026-04-11
 ```
 ---
 ## Tugas Praktikum 1
-Jawaban : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ mkdir -p ~/bin
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum1$ export PATH="$HOME/bin:$PATH"
@@ -716,9 +766,10 @@ Memory  : 1.3Gi/3.3Gi
 ```
 
 
+
 ---
 ## Tugas Praktikum 2
-Jawaban : 
+
 
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum2$ LAPORAN="audit-konfigurasi-$(date +%F).txt"
@@ -1063,9 +1114,10 @@ Pemisahan stdout (>) dan stderr (2>) penting agar daftar konfigurasi tidak kotor
 Hal ini memudahkan penghitungan file dan memastikan log error tersimpan khusus untuk pengecekan hak akses.
 ```
 
+
 ---
 ## Tugas Praktikum 3
-Jawaban : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum3$ cat << 'EOF' > ~/bin/daily-healthcheck
 > LOG_FILE="$HOME/healthcheck-$(date +%F).log"
@@ -1177,9 +1229,10 @@ EOF
 
 [SUKSES] Laporan disimpan di: /home/ibennn/healthcheck-2026-04-13.log
 ```
+
 ---
 ## Tugas Praktikum 4
-Jawaban : 
+
 ```bash
 ibennn@ibennn-QEMU-Virtual-Machine:~/praktikum-os/week07/tugas_praktikum/praktikum4$ touch "laporan bulanan.txt"
 touch "backup [utama] config.conf"
@@ -1210,3 +1263,4 @@ PENTINGNYA QUOTING DI BASH:
 3. Keamanan Variabel: Menggunakan "$file" memastikan isi variabel diproses secara utuh meskipun mengandung karakter aneh.
 EOF
 ```
+
