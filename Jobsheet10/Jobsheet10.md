@@ -1,10 +1,4 @@
-# Jobsheet 9 - Sistem Operasi
-
-```text
-+-----------------------------------------------------------+
-| JOBSHEET 9 | BASH PROGRAMMING                        |
-+-----------------------------------------------------------+
-```
+# Jobsheet 9 - Bash Programming
 
 ## Identitas
 
@@ -116,3 +110,28 @@ Analisis :
 Sistem bekerja secara optimal karena seluruh proses dijalankan langsung di RAM tanpa perlu menggunakan memori Swap.
 
 ---
+## Praktikum 10.3 
+### 
+```bash
+
+```
+
+### 
+```bash
+
+```
+
+### 
+```bash
+
+```
+
+### 
+```bash
+
+```
+
+### 
+```bash
+
+```
